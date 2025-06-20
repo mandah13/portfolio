@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私のポートフォリオ</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        .header {
+            text-align: center;
+            padding: 80px 0;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin-bottom: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            margin: 0 auto 30px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+            position: relative;
+            z-index: 1;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.1);
+        }
+
+        .name {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .title {
+            font-size: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-item {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4);
+            background-size: 300% 100%;
+            animation: gradient-shift 3s ease infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        .card h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 40px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -45px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            background: #667eea;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .job-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .company {
+            font-size: 1.1rem;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .duration {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        /* Skills Grid */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .skill-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .skill-item:hover::before {
+            left: 100%;
+        }
+
+        .skill-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-level {
+            font-size: 0.9rem;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-image {
+            height: 200px;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+        }
+
+        .project-content {
+            padding: 25px;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .project-desc {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .tech-tag {
+            background: #f0f0f0;
+            color: #666;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+
+        /* Education */
+        .education-item {
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(78, 205, 196, 0.1) 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+
+        .degree {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .school {
+            font-size: 1.1rem;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+
+        .year {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .name {
+                font-size: 2rem;
+            }
+            
+            .title {
+                font-size: 1.2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .card {
+                padding: 25px;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header fade-in">
+            <div class="profile-image">👤</div>
+            <h1 class="name">あなたの名前</h1>
+            <p class="title">専門職</p>
+            <div class="contact-info">
+                <a href="mailto:email@example.com" class="contact-item">📧 email@example.com</a>
+                <a href="tel:+81-90-1234-5678" class="contact-item">📞 +81-90-1234-5678</a>
+                <a href="#" class="contact-item">🌐 linkedin.com/in/username</a>
+                <a href="#" class="contact-item">📍 東京、日本</a>
+            </div>
+        </div>
+
+        <!-- About Section -->
+        <div class="card fade-in">
+            <h2><span class="icon">👨‍💼</span> 自己紹介</h2>
+            <p class="description">
+                私は[X]年の経験を持つ[専門分野]の専門家です。この業界において新しい技術やイノベーションの導入、チームの生産性向上に取り組んでいます。私の目標は[あなたの目標、ビジョン]を実現することです。
+            </p>
+        </div>
+
+        <!-- Experience Section -->
+        <div class="card fade-in">
+            <h2><span class="icon">💼</span> 職歴</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="job-title">シニアスペシャリスト</div>
+                    <div class="company">会社名1</div>
+                    <div class="duration">2020年 - 現在</div>
+                    <div class="description">
+                        • チームリーダーシップとプロジェクトマネジメント<br>
+                        • 新システムの導入・開発<br>
+                        • 業務効率を30%向上させました
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="job-title">スペシャリスト</div>
+                    <div class="company">会社名2</div>
+                    <div class="duration">2018年 - 2020年</div>
+                    <div class="description">
+                        • 主要業務の実行<br>
+                        • 顧客満足度の向上<br>
+                        • チームメンバーの研修・育成
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="job-title">インターン</div>
+                    <div class="company">会社名3</div>
+                    <div class="duration">2017年 - 2018年</div>
+                    <div class="description">
+                        • スキル習得、実践経験の蓄積<br>
+                        • 大学理論の実践への応用<br>
+                        • チームサポートを受けながら独立プロジェクトを実行
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="card fade-in">
+            <h2><span class="icon">🎯</span> スキル</h2>
+            <div class="skills-grid">
+                <div class="skill-item">
+                    <div style="font-size: 1.2rem; font-weight: 600;">技術スキル</div>
+                    <div class="skill-level">上級レベル</div>
+                </div>
+                <div class="skill-item">
+                    <div style="font-size: 1.2rem; font-weight: 600;">プロジェクト管理</div>
+                    <div class="skill-level">エキスパートレベル</div>
+                </div>
+                <div class="skill-item">
+                    <div style="font-size: 1.2rem; font-weight: 600;">チームワーク</div>
+                    <div class="skill-level">上級レベル</div>
+                </div>
+                <div class="skill-item">
+                    <div style="font-size: 1.2rem; font-weight: 600;">コミュニケーション</div>
+                    <div class="skill-level">エキスパートレベル</div>
+                </div>
+                <div class="skill-item">
+                    <div style="font-size: 1.2rem; font-weight: 600;">ビジネス分析</div>
+                    <div class="skill-level">中級レベル</div>
+                </div>
+                <div class="skill-item">
+                    <div style="font-size: 1.2rem; font-weight: 600;">語学（英語）</div>
+                    <div class="skill-level">上級レベル</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="card fade-in">
+            <h2><span class="icon">🚀</span> プロジェクト</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">📱</div>
+                    <div class="project-content">
+                        <div class="project-title">プロジェクト1</div>
+                        <div class="project-desc">
+                            このプロジェクトは[簡潔な説明]です。主な目標は[目標]であり、[結果]を達成しました。
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">💻</div>
+                    <div class="project-content">
+                        <div class="project-title">プロジェクト2</div>
+                        <div class="project-desc">
+                            このプロジェクトは[簡潔な説明]です。主な目標は[目標]であり、[結果]を達成しました。
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Django</span>
+                            <span class="tech-tag">PostgreSQL</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="project-card">
+                    <div class="project-image">📊</div>
+                    <div class="project-content">
+                        <div class="project-title">プロジェクト3</div>
+                        <div class="project-desc">
+                            このプロジェクトは[簡潔な説明]です。主な目標は[目標]であり、[結果]を達成しました。
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">D3.js</span>
+                            <span class="tech-tag">API</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Education Section -->
+        <div class="card fade-in">
+            <h2><span class="icon">🎓</span> 学歴</h2>
+            <div class="education-item">
+                <div class="degree">修士号</div>
+                <div class="school">大学名</div>
+                <div class="year">2015年 - 2017年</div>
+            </div>
+            <div class="education-item">
+                <div class="degree">学士号</div>
+                <div class="school">大学名</div>
+                <div class="year">2011年 - 2015年</div>
+            </div>
+        </div>
+
+        <!-- Languages Section -->
+        <div class="card fade-in">
+            <h2><span class="icon">🌍</span> 言語</h2>
+            <div class="skills-grid">
+                <div style="background: linear-gradient(135deg, #4CAF50, #45a049); color: white; padding: 20px; border-radius: 15px; text-align: center;">
+                    <div style="font-size: 1.2rem; font-weight: 600;">日本語</div>
+                    <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">母国語</div>
+                </div>
+                <div style="background: linear-gradient(135deg, #2196F3, #1976D2); color: white; padding: 20px; border-radius: 15px; text-align: center;">
+                    <div style="font-size: 1.2rem; font-weight: 600;">英語</div>
+                    <div style="font-size: 0.9rem; margin-top: 5px; opacity: 0.9;">上級</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Add some interactive effects
+        document.querySelectorAll('.skill-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Profile image click effect
+        document.querySelector('.profile-image').addEventListener('click', function() {
+            this.style.animation = 'none';
+            this.offsetHeight; // trigger reflow
+            this.style.animation = 'shimmer 1s ease-in-out';
+        });
+    </script>
+</body>
+</html>
